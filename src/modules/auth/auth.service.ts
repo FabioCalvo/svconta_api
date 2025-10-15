@@ -1,4 +1,4 @@
-import { Injectable, UnauthorizedException } from '@nestjs/common';
+import { Injectable, UnauthorizedException, OnModuleInit } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
@@ -6,13 +6,18 @@ import * as bcrypt from 'bcryptjs';
 import { User, UserRole } from '../../entities/user.entity';
 
 @Injectable()
-export class AuthService {
+export class AuthService implements OnModuleInit {
   constructor(
     @InjectRepository(User)
     private userRepository: Repository<User>,
     private jwtService: JwtService,
-  ) {
-    this.createDefaultAdmin();
+  ) {}
+
+  async onModuleInit() {
+    // Delay to ensure repository is fully initialized
+    setTimeout(() => this.createDefaultAdmin().catch(err =>
+      console.log('Default admin creation skipped (may already exist)')
+    ), 1000);
   }
 
   async validateUser(email: string, password: string): Promise<any> {
