@@ -26,6 +26,9 @@ export class Version {
   @Column({ nullable: true })
   checksum: string;
 
+  @Column({ nullable: true })
+  required_version: string;
+
   @Column()
   release_date: Date;
 

@@ -212,6 +212,7 @@ export class AdminService {
       active: version.active,
       fileSize: version.file_size,
       checksum: version.checksum,
+      requiredVersion: version.required_version,
       releaseDate: version.release_date,
       createdAt: version.created_at,
       updatedAt: version.updated_at,
@@ -239,6 +240,7 @@ export class AdminService {
       active: savedVersion.active,
       fileSize: savedVersion.file_size,
       checksum: savedVersion.checksum,
+      requiredVersion: savedVersion.required_version,
       releaseDate: savedVersion.release_date,
       createdAt: savedVersion.created_at,
     };
@@ -262,6 +264,7 @@ export class AdminService {
       active: updatedVersion.active,
       fileSize: updatedVersion.file_size,
       checksum: updatedVersion.checksum,
+      requiredVersion: updatedVersion.required_version,
       releaseDate: updatedVersion.release_date,
       updatedAt: updatedVersion.updated_at,
     };

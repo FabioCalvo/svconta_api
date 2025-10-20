@@ -80,6 +80,7 @@ export class VersionService {
       releaseNotes: updateAvailable ? latestVersion.release_notes : null,
       fileSize: updateAvailable ? latestVersion.file_size : null,
       checksum: updateAvailable ? latestVersion.checksum : null,
+      requiredVersion: updateAvailable ? latestVersion.required_version : null,
       releaseDate: updateAvailable ? latestVersion.release_date : null,
       files,
     };
@@ -99,6 +100,7 @@ export class VersionService {
         'active',
         'file_size',
         'checksum',
+        'required_version',
         'created_at',
       ],
     });
@@ -113,6 +115,7 @@ export class VersionService {
       active: version.active,
       fileSize: version.file_size,
       checksum: version.checksum,
+      requiredVersion: version.required_version,
       createdAt: version.created_at,
     }));
   }
