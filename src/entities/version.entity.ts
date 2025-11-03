@@ -1,5 +1,7 @@
 import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn } from 'typeorm';
 
+export type VersionType = 'Install' | 'Update';
+
 @Entity('versions')
 export class Version {
   @PrimaryGeneratedColumn('uuid')
@@ -11,7 +13,7 @@ export class Version {
   @Column({ type: 'text', nullable: true })
   release_notes: string;
 
-  @Column()
+  @Column({ nullable: true })
   download_url: string;
 
   @Column({ default: false })
@@ -28,6 +30,9 @@ export class Version {
 
   @Column({ nullable: true })
   required_version: string;
+
+  @Column({ type: 'enum', enum: ['install', 'update'] })
+  version_type: VersionType;
 
   @Column()
   release_date: Date;

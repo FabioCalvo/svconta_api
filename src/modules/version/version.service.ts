@@ -81,6 +81,7 @@ export class VersionService {
       fileSize: updateAvailable ? latestVersion.file_size : null,
       checksum: updateAvailable ? latestVersion.checksum : null,
       requiredVersion: updateAvailable ? latestVersion.required_version : null,
+      versionType: updateAvailable ? latestVersion.version_type : null,
       releaseDate: updateAvailable ? latestVersion.release_date : null,
       files,
     };
@@ -101,6 +102,7 @@ export class VersionService {
         'file_size',
         'checksum',
         'required_version',
+        'version_type',
         'created_at',
       ],
     });
@@ -116,6 +118,7 @@ export class VersionService {
       fileSize: version.file_size,
       checksum: version.checksum,
       requiredVersion: version.required_version,
+      versionType: version.version_type,
       createdAt: version.created_at,
     }));
   }

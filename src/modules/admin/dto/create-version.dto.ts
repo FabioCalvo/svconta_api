@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { IsString, IsBoolean, IsOptional, IsNumber, IsDateString } from 'class-validator';
+import { IsString, IsBoolean, IsOptional, IsNumber, IsDateString, IsEnum } from 'class-validator';
+import { VersionType } from '../../../entities/version.entity';
 
 export class CreateVersionDto {
   @ApiProperty({ example: '1.0.0' })
@@ -11,9 +12,10 @@ export class CreateVersionDto {
   @IsString()
   release_notes?: string;
 
-  @ApiProperty({ example: 'https://example.com/download/v1.0.0' })
+  @ApiProperty({ required: false, example: 'https://example.com/download/v1.0.0' })
+  @IsOptional()
   @IsString()
-  download_url: string;
+  download_url?: string;
 
   @ApiProperty({ required: false, default: false })
   @IsOptional()
@@ -39,6 +41,10 @@ export class CreateVersionDto {
   @IsOptional()
   @IsString()
   required_version?: string;
+
+  @ApiProperty({ enum: ['install', 'update'], example: 'update' })
+  @IsEnum(['install', 'update'])
+  version_type: VersionType;
 
   @ApiProperty({ example: '2024-01-01T00:00:00Z' })
   @IsDateString()

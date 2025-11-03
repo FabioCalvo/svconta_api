@@ -8,6 +8,7 @@ export enum FileType {
   DOCUMENT = 'document',
   LIBRARY = 'library',
   CONFIGURATION = 'configuration',
+  INSTALLER = 'installer',
   OTHER = 'other'
 }
 
