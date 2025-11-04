@@ -7,7 +7,7 @@ export class Version {
   @PrimaryGeneratedColumn('uuid')
   id: string;
 
-  @Column({ unique: true })
+  @Column()
   version: string;
 
   @Column({ type: 'text', nullable: true })
