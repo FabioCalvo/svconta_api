@@ -4,6 +4,9 @@ import { Repository } from 'typeorm';
 import { JwtService } from '@nestjs/jwt';
 import * as bcrypt from 'bcryptjs';
 import { User, UserRole } from '../../entities/user.entity';
+import { UsersService } from '../users/users.service';
+import { CreateUserDto } from '../users/dto/create-user.dto';
+import { UserResponseDto } from '../users/dto/user-response.dto';
 
 @Injectable()
 export class AuthService implements OnModuleInit {
@@ -11,6 +14,7 @@ export class AuthService implements OnModuleInit {
     @InjectRepository(User)
     private userRepository: Repository<User>,
     private jwtService: JwtService,
+    private usersService: UsersService,
   ) {}
 
   async onModuleInit() {
@@ -32,11 +36,30 @@ export class AuthService implements OnModuleInit {
     return null;
   }
 
+  async register(createUserDto: CreateUserDto): Promise<{ user: UserResponseDto; access_token: string }> {
+    // Create the user using the users service
+    const user = await this.usersService.create(createUserDto);
+
+    // Generate JWT token for immediate login
+    const payload = {
+      email: user.email,
+      sub: user.id,
+      role: user.role
+    };
+
+    const access_token = this.jwtService.sign(payload);
+
+    return {
+      user,
+      access_token,
+    };
+  }
+
   async login(user: any) {
-    const payload = { 
-      email: user.email, 
-      sub: user.id, 
-      role: user.role 
+    const payload = {
+      email: user.email,
+      sub: user.id,
+      role: user.role
     };
 
     // Update last login

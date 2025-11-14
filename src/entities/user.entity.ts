@@ -44,6 +44,12 @@ export class User {
   @Column({ nullable: true })
   company: string;
 
+  @Column({ nullable: true })
+  second_last_name: string;
+
+  @Column({ nullable: true })
+  personal_id: string;
+
   @CreateDateColumn()
   created_at: Date;
 

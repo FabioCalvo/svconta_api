@@ -11,6 +11,7 @@ import { LicenseModule } from './modules/license/license.module';
 import { AnalyticsModule } from './modules/analytics/analytics.module';
 import { HealthModule } from './modules/health/health.module';
 import { AdminModule } from './modules/admin/admin.module';
+import { UsersModule } from './modules/users/users.module';
 
 // Configuration
 import { DatabaseConfig } from './config/database.config';
@@ -52,6 +53,7 @@ import { DatabaseConfig } from './config/database.config';
      
     PassportModule.register({ defaultStrategy: 'jwt' }),
     AuthModule,
+    UsersModule,
     VersionModule,
     LicenseModule,
     AnalyticsModule,
